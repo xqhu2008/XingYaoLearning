@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#060606">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/tv_english"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="#ff0000"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="36sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:id="@+id/imageView_learning"
+        android:layout_margin="20dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal">
+
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_learning_prev"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_rew"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_learning_play"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_play"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_learning_next"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_ff"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_learning_exit"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_lock_power_off"/>
+
+    </LinearLayout>
+</LinearLayout>
