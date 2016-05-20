@@ -9,28 +9,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="left"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
         android:background="#b0b0b0"
-        android:layout_marginBottom="10dp">
+        >
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="学习类型"
-            android:textSize="16sp"
-            android:layout_weight="1"
+            android:textSize="24sp"
             android:layout_margin="10dp"
             />
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:id="@+id/spn_learning_type"
-            android:layout_weight="1"
             android:layout_margin="10dp"
             android:contextClickable="false"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:layoutMode="opticalBounds"/>
 
     </LinearLayout>
 
@@ -51,7 +50,8 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:id="@+id/btn_color"/>
+                android:id="@+id/btn_color"
+                android:textSize="24sp"/>
             <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -62,7 +62,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:id="@+id/btn_number"/>
+                android:id="@+id/btn_number"
+                android:textSize="24sp"/>
         </TableRow>
 
         <TableRow android:layout_width="match_parent"
@@ -74,14 +75,16 @@
                 android:text="水果"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:id="@+id/btn_fruit"/>
+                android:id="@+id/btn_fruit"
+                android:textSize="24sp"/>
             <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="蔬菜"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:id="@+id/btn_vegetable"/>
+                android:id="@+id/btn_vegetable"
+                android:textSize="24sp"/>
         </TableRow>
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -93,7 +96,8 @@
                 android:layout_span="2"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:id="@+id/btn_exit"/>
+                android:id="@+id/btn_exit"
+                android:textSize="24sp"/>
         </TableRow>
     </TableLayout>
 

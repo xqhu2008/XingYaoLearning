@@ -34,6 +34,7 @@ public class LearningActivity extends AppCompatActivity {
     private float mVolumnRatio;
 
     private String mFuncType;
+    private boolean mLearningType = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,9 @@ public class LearningActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mFuncType = bundle.getString(MainActivity.ACTIVITY_FUNCTION);
-
+        mLearningType = bundle.getBoolean(MainActivity.ACTIVITY_TYPE);
+        int id = mLearningType ? R.string.title_learing : R.string.title_example;
+        setTitle(id);
         mResourceName = getResources().getStringArray(funcMap.get(mFuncType));
         mImageView = (ImageView)findViewById(R.id.imageView_learning);
         mIndex = 0;
@@ -111,7 +114,7 @@ public class LearningActivity extends AppCompatActivity {
             int index = 1;
             for (String sndFile : mResourceName) {
                 AssetFileDescriptor afdSnd = getResources().getAssets()
-                    .openFd(mFuncType + "/" + sndFile + ".wav");
+                    .openFd("resource/" + mFuncType + "/" + sndFile + ".wav");
                 int sound = mSndPool.load(afdSnd, 1);
                 mSndPoolMap.put(index, sound);
                 index += 1;
@@ -140,7 +143,8 @@ public class LearningActivity extends AppCompatActivity {
 
         byte [] buffer = null;
         try{
-            InputStream in = getResources().getAssets().open(mFuncType + "/" + mResourceName[mIndex] + ".bmp");
+            InputStream in = getResources().getAssets().open("resource/" + mFuncType + "/" +
+                    mResourceName[mIndex] + ".bmp");
 
             int length = in.available();
             buffer = new byte[length];
@@ -153,7 +157,8 @@ public class LearningActivity extends AppCompatActivity {
             Bitmap bm = BitmapFactory.decodeByteArray(buffer, 0, buffer.length);
             mImageView.setImageBitmap(bm);
             mEnglishText.setText(mResourceName[mIndex]);
-            playSoundFromAsset();
+            if (mLearningType)
+                playSoundFromAsset();
         }
     }
 }

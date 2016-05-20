@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -14,14 +15,16 @@ import com.bluehawk.xingyaplearning.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Spinner mSpnLearningType = null;
-    private ArrayAdapter mArrayAdapter;
+    private ArrayAdapter<String> mArrayAdapter;
     private Button mColorButton;
     private Button mNumberButton;
     private Button mFruitButton;
     private Button mVegeButton;
     private Button mExitButton;
+    private boolean mLearningType = true;
 
     static final String ACTIVITY_FUNCTION = "activity_function";
+    static final String ACTIVITY_TYPE = "activity_type";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mSpnLearningType = (Spinner)findViewById(R.id.spn_learning_type);
-        mArrayAdapter = ArrayAdapter.createFromResource(
+        mArrayAdapter = new ArrayAdapter<String>(
                 this,
-                R.array.learning_type,
-                android.R.layout.simple_spinner_item);
+                R.layout.spinner_row,
+                R.id.weekofday,
+                getResources().getStringArray(R.array.learning_type));
 
-        mArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //mArrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 
         mSpnLearningType.setAdapter(mArrayAdapter);
+        mSpnLearningType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mLearningType = position == 0 ? true : false;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mColorButton = (Button)findViewById(R.id.btn_color);
         mNumberButton = (Button)findViewById(R.id.btn_number);
         mFruitButton = (Button)findViewById(R.id.btn_fruit);
@@ -63,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(MainActivity.this, LearningActivity.class);
+        intent.putExtra(ACTIVITY_TYPE, mLearningType);
         switch (v.getId()) {
             case R.id.btn_color :
                 intent.putExtra(ACTIVITY_FUNCTION, "color");
