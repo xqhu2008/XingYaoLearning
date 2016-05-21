@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.bluehawk.xingyaplearning.R;
@@ -16,11 +17,11 @@ import com.bluehawk.xingyaplearning.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Spinner mSpnLearningType = null;
     private ArrayAdapter<String> mArrayAdapter;
-    private Button mColorButton;
-    private Button mNumberButton;
-    private Button mFruitButton;
-    private Button mVegeButton;
-    private Button mExitButton;
+    private ImageButton mColorButton;
+    private ImageButton mNumberButton;
+    private ImageButton mFruitButton;
+    private ImageButton mVegeButton;
+    private ImageButton mExitButton;
     private boolean mLearningType = true;
 
     static final String ACTIVITY_FUNCTION = "activity_function";
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         mSpnLearningType = (Spinner)findViewById(R.id.spn_learning_type);
@@ -52,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        mColorButton = (Button)findViewById(R.id.btn_color);
-        mNumberButton = (Button)findViewById(R.id.btn_number);
-        mFruitButton = (Button)findViewById(R.id.btn_fruit);
-        mVegeButton = (Button)findViewById(R.id.btn_vegetable);
-        mExitButton = (Button)findViewById(R.id.btn_exit);
+        mColorButton = (ImageButton)findViewById(R.id.btn_color);
+        mNumberButton = (ImageButton)findViewById(R.id.btn_number);
+        mFruitButton = (ImageButton)findViewById(R.id.btn_fruit);
+        mVegeButton = (ImageButton)findViewById(R.id.btn_vegetable);
+        mExitButton = (ImageButton)findViewById(R.id.btn_exit);
 
         mColorButton.setOnClickListener(this);
         mNumberButton.setOnClickListener(this);

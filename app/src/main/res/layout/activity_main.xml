@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#808080">
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,10 +40,10 @@
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <Button
+            <ImageButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="颜色"
+                android:text="@string/color"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
@@ -52,10 +52,10 @@
                 android:layout_margin="10dp"
                 android:id="@+id/btn_color"
                 android:textSize="24sp"/>
-            <Button
+            <ImageButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="数字"
+                android:text="@string/number"
                 android:layout_marginLeft="10dp"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
@@ -69,18 +69,19 @@
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <Button
+            <ImageButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="水果"
+                android:text="@string/fruit"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:id="@+id/btn_fruit"
-                android:textSize="24sp"/>
-            <Button
+                android:textSize="24sp"
+                android:adjustViewBounds="false"/>
+            <ImageButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="蔬菜"
+                android:text="@string/vegetable"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:id="@+id/btn_vegetable"
@@ -89,10 +90,10 @@
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <Button
+            <ImageButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="退出"
+                android:text="@string/exit"
                 android:layout_span="2"
                 android:layout_weight="1"
                 android:layout_margin="10dp"

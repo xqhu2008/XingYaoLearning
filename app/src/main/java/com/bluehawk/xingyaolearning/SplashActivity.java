@@ -1,21 +1,24 @@
 package com.bluehawk.xingyaolearning;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 
 import com.bluehawk.xingyaplearning.R;
 
-public class SplashActivity extends AppCompatActivity {
-    private static final int AUTO_HIDE_DELAY_MILLIS = 10000;
+public class SplashActivity extends Activity {
+    private static final int AUTO_HIDE_DELAY_MILLIS = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        */
         setContentView(R.layout.activity_splash);
 
     }

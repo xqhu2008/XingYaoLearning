@@ -6,4 +6,9 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="number">数字</string>
+    <string name="color">颜色</string>
+    <string name="fruit">水果</string>
+    <string name="vegetable">蔬菜</string>
+    <string name="exit">退出</string>
 </resources>
