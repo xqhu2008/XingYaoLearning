@@ -1,29 +1,34 @@
 package com.bluehawk.xingyaolearning;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.bluehawk.xingyaplearning.R;
 
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener {
-    private Button mColorButton;
-    private Button mNumberButton;
-    private Button mFruitButton;
-    private Button mVegeButton;
-    private Button mExitButton;
-    private Button mAnimalButton;
-    private Button mInsectButton;
-    private boolean mLearningType = true;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Vector;
 
+public class MainActivity extends AppCompatActivity {
+    private ListView mListView;
+    private boolean mLearningType = true;
     private Switch mLearningTypeSwitch;
 
     static final String ACTIVITY_FUNCTION = "activity_function";
@@ -32,28 +37,39 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
-        mColorButton = (Button) findViewById(R.id.btn_color);
-        mNumberButton = (Button)findViewById(R.id.btn_number);
-        mFruitButton = (Button)findViewById(R.id.btn_fruit);
-        mVegeButton = (Button)findViewById(R.id.btn_vegetable);
-        mExitButton = (Button)findViewById(R.id.btn_exit);
-        mAnimalButton = (Button)findViewById(R.id.btn_animal);
-        mInsectButton = (Button)findViewById(R.id.btn_insect);
+        Vector<LearningItem> vector = new Vector<LearningItem>();
 
-        mColorButton.setOnClickListener(this);
-        mNumberButton.setOnClickListener(this);
-        mFruitButton.setOnClickListener(this);
-        mVegeButton.setOnClickListener(this);
-        mExitButton.setOnClickListener(this);
-        mAnimalButton.setOnClickListener(this);
-        mInsectButton.setOnClickListener(this);
+        try {
+            String[] items = getResources().getAssets().list("resource");
+            InputStream inputStream = null;
+            for(String item : items) {
+                inputStream = getResources().getAssets().open("item/" + item + ".png");
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                vector.add(new LearningItem(bitmap, item));
+            }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mListView = (ListView)findViewById(R.id.lv_learning_item);
+        mListView.setAdapter(new LearningAdapter(this, R.layout.learning_listview, vector));
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LearningItem item = (LearningItem)parent.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, LearningActivity.class);
+                intent.putExtra(ACTIVITY_FUNCTION, item.getName());
+                intent.putExtra(ACTIVITY_TYPE, mLearningType);
+                startActivity(intent);
+            }
+        });
 
         mLearningTypeSwitch = (Switch)findViewById(R.id.sw_learning_type);
         mLearningTypeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,47 +90,75 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, LearningActivity.class);
-        intent.putExtra(ACTIVITY_TYPE, mLearningType);
-        switch (v.getId()) {
-            case R.id.btn_color :
-                intent.putExtra(ACTIVITY_FUNCTION, "color");
-                startActivity(intent);
-                break;
+    private class LearningItem {
+        private Bitmap mImage;
+        private String mName;
 
-            case R.id.btn_fruit :
-                intent.putExtra(ACTIVITY_FUNCTION, "fruit");
-                startActivity(intent);
-                break;
+        public LearningItem(Bitmap image, String name) {
+            mImage = image;
+            mName = name;
+        }
 
-            case R.id.btn_number :
-                intent.putExtra(ACTIVITY_FUNCTION, "number");
-                startActivity(intent);
-                break;
+        public Bitmap getImage() {
+            return mImage;
+        }
 
-            case R.id.btn_vegetable :
-                intent.putExtra(ACTIVITY_FUNCTION, "vegetable");
-                startActivity(intent);
-                break;
+        public String getName() {
+            return mName;
+        }
+    }
 
-            case R.id.btn_animal :
-                intent.putExtra(ACTIVITY_FUNCTION, "animal");
-                startActivity(intent);
-                break;
+    private class LearningAdapter extends BaseAdapter {
+        private LayoutInflater mLayoutInflater;
+        private final int mLayout;
+        private final Context mContext;
+        private Vector<LearningItem> mItemVector;
 
-            case R.id.btn_insect :
-                intent.putExtra(ACTIVITY_FUNCTION, "insect");
-                startActivity(intent);
-                break;
+        public LearningAdapter(Context context, int layout, Vector<LearningItem> vector) {
+            this.mLayoutInflater = LayoutInflater.from(context);
+            this.mLayout = layout;
+            this.mContext = context;
+            this.mItemVector = vector;
+        }
 
-            case R.id.btn_exit :
-                finish();
-                break;
+        @Override
+        public int getCount() {
+            return mItemVector.size();
+        }
 
-            default :
-                break;
+        @Override
+        public Object getItem(int position) {
+            return mItemVector.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = mLayoutInflater.inflate(R.layout.learning_listview, null);
+                holder = new ViewHolder();
+                holder.mImageView = (ImageView)convertView.findViewById(R.id.iv_image);
+                holder.mTextView = (TextView)convertView.findViewById(R.id.tv_text);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder)convertView.getTag();
+            }
+
+            LearningItem item = (LearningItem) getItem(position);
+            holder.mImageView.setImageBitmap(item.getImage());
+            holder.mTextView.setText(item.getName());
+
+            return convertView;
+        }
+
+        public final class ViewHolder {
+            public ImageView mImageView;
+            public TextView mTextView;
         }
     }
 }
