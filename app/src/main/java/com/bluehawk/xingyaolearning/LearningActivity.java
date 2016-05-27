@@ -53,6 +53,8 @@ public class LearningActivity extends AppCompatActivity {
         funcMap.put("fruit", R.array.learning_fruit);
         funcMap.put("number", R.array.learning_number);
         funcMap.put("vegetable", R.array.learning_vegetable);
+        funcMap.put("animal", R.array.learning_animal);
+        funcMap.put("insect", R.array.learning_insect);
 
         Bundle bundle = getIntent().getExtras();
         mFuncType = bundle.getString(MainActivity.ACTIVITY_FUNCTION);

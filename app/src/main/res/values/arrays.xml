@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="learning_type">
-        <item>学习</item>
-        <item>测验</item>
-    </string-array>
-
     <string-array name="learning_color">
         <item>black</item>
         <item>white</item>
@@ -61,5 +56,14 @@
         <item>potato</item>
         <item>pumpkin</item>
         <item>tomato</item>
+    </string-array>
+
+    <string-array name="learning_animal">
+        <item>elephant</item>
+        <item>bear</item>
+    </string-array>
+
+    <string-array name="learning_insect">
+        <item>spider</item>
     </string-array>
 </resources>

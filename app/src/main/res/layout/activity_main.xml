@@ -8,39 +8,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:background="#b0b0b0"
-        >
+        android:layout_weight="1"
+        android:gravity="center_vertical|center"
+        android:showDividers="middle">
 
-        <TextView
+        <Switch
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="学习类型"
-            android:textSize="24sp"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_learning_type"
+            android:showText="true"
+            android:textSize="16sp"
+            android:textOff="@string/type_example"
+            android:textOn="@string/type_learning"
+            android:text="@string/typename"
+            android:checked="true"
+            android:layout_margin="5dp"
             />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/spn_learning_type"
-            android:layout_margin="10dp"
-            android:contextClickable="false"
-            android:gravity="center_vertical"
-            android:layoutMode="opticalBounds"/>
 
     </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#b0b0b0">
+        android:layout_height="0dp"
+        android:layout_weight="10">
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <ImageButton
+            <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="@string/color"
@@ -51,8 +47,9 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:id="@+id/btn_color"
-                android:textSize="24sp"/>
-            <ImageButton
+                android:textSize="24sp"
+                />
+            <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="@string/number"
@@ -63,13 +60,14 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:id="@+id/btn_number"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                />
         </TableRow>
 
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <ImageButton
+            <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="@string/fruit"
@@ -77,20 +75,47 @@
                 android:layout_weight="1"
                 android:id="@+id/btn_fruit"
                 android:textSize="24sp"
-                android:adjustViewBounds="false"/>
-            <ImageButton
+                android:adjustViewBounds="false"
+                />
+            <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="@string/vegetable"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:id="@+id/btn_vegetable"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                />
         </TableRow>
+
         <TableRow android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1">
-            <ImageButton
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:text="@string/animal"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_animal"
+                android:textSize="24sp"
+                android:adjustViewBounds="false"
+                />
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:text="@string/insect"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_insect"
+                android:textSize="24sp"
+                />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1">
+            <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:text="@string/exit"
@@ -98,7 +123,8 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:id="@+id/btn_exit"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                />
         </TableRow>
     </TableLayout>
 

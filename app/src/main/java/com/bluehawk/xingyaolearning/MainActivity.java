@@ -7,22 +7,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.bluehawk.xingyaplearning.R;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Spinner mSpnLearningType = null;
-    private ArrayAdapter<String> mArrayAdapter;
-    private ImageButton mColorButton;
-    private ImageButton mNumberButton;
-    private ImageButton mFruitButton;
-    private ImageButton mVegeButton;
-    private ImageButton mExitButton;
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener {
+    private Button mColorButton;
+    private Button mNumberButton;
+    private Button mFruitButton;
+    private Button mVegeButton;
+    private Button mExitButton;
+    private Button mAnimalButton;
+    private Button mInsectButton;
     private boolean mLearningType = true;
+
+    private Switch mLearningTypeSwitch;
 
     static final String ACTIVITY_FUNCTION = "activity_function";
     static final String ACTIVITY_TYPE = "activity_type";
@@ -36,38 +38,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
-        mSpnLearningType = (Spinner)findViewById(R.id.spn_learning_type);
-        mArrayAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.spinner_row,
-                R.id.weekofday,
-                getResources().getStringArray(R.array.learning_type));
-
-        //mArrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-
-        mSpnLearningType.setAdapter(mArrayAdapter);
-        mSpnLearningType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mLearningType = position == 0 ? true : false;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        mColorButton = (ImageButton)findViewById(R.id.btn_color);
-        mNumberButton = (ImageButton)findViewById(R.id.btn_number);
-        mFruitButton = (ImageButton)findViewById(R.id.btn_fruit);
-        mVegeButton = (ImageButton)findViewById(R.id.btn_vegetable);
-        mExitButton = (ImageButton)findViewById(R.id.btn_exit);
+        mColorButton = (Button) findViewById(R.id.btn_color);
+        mNumberButton = (Button)findViewById(R.id.btn_number);
+        mFruitButton = (Button)findViewById(R.id.btn_fruit);
+        mVegeButton = (Button)findViewById(R.id.btn_vegetable);
+        mExitButton = (Button)findViewById(R.id.btn_exit);
+        mAnimalButton = (Button)findViewById(R.id.btn_animal);
+        mInsectButton = (Button)findViewById(R.id.btn_insect);
 
         mColorButton.setOnClickListener(this);
         mNumberButton.setOnClickListener(this);
         mFruitButton.setOnClickListener(this);
         mVegeButton.setOnClickListener(this);
         mExitButton.setOnClickListener(this);
+        mAnimalButton.setOnClickListener(this);
+        mInsectButton.setOnClickListener(this);
+
+
+        mLearningTypeSwitch = (Switch)findViewById(R.id.sw_learning_type);
+        mLearningTypeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mLearningType = isChecked;
+            }
+        });
     }
 
     @Override
@@ -105,6 +99,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
+            case R.id.btn_animal :
+                intent.putExtra(ACTIVITY_FUNCTION, "animal");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_insect :
+                intent.putExtra(ACTIVITY_FUNCTION, "insect");
+                startActivity(intent);
+                break;
+
             case R.id.btn_exit :
                 finish();
                 break;
@@ -114,3 +118,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
+
