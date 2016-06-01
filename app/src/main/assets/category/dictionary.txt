@@ -1,0 +1,9 @@
+fruit:水果
+number:数字
+insect:昆虫
+sport:运动
+shape:形状
+vegetable:蔬菜
+color:颜色
+animal:动物
+

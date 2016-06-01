@@ -4,14 +4,7 @@
     <string name="title_example">星瑶学习 - 测验</string>
 
     <string name="typename">学习类型</string>
-    <string name="number">数字</string>
-    <string name="color">颜色</string>
-    <string name="fruit">水果</string>
-    <string name="vegetable">蔬菜</string>
-    <string name="exit">退出</string>
     <string name="type_learning">学习</string>
     <string name="type_example">测验</string>
-    <string name="animal">动物</string>
-    <string name="fish">昆虫</string>
-    <string name="insect">昆虫</string>
+    <string name="resource_config_file">sites.xml</string>
 </resources>
