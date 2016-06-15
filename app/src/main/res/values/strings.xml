@@ -6,5 +6,5 @@
     <string name="typename">学习类型</string>
     <string name="type_learning">学习</string>
     <string name="type_example">测验</string>
-    <string name="resource_config_file">sites.xml</string>
+    <string name="resource_config_file">vocabularys.xml</string>
 </resources>

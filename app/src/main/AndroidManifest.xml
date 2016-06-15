@@ -8,9 +8,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.bluehawk.xingyaolearning.MainActivity">
+        <activity android:name="com.bluehawk.xingyaolearning.word.MainActivity">
         </activity>
-        <activity android:name="com.bluehawk.xingyaolearning.LearningActivity">
+        <activity android:name="com.bluehawk.xingyaolearning.word.LearningActivity">
         </activity>
         <activity
             android:name="com.bluehawk.xingyaolearning.SplashActivity"

@@ -1,5 +1,6 @@
-package com.bluehawk.xingyaolearning;
+package com.bluehawk.xingyaolearning.word;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bluehawk.xingyaolearning.YaoWordImage;
 import com.bluehawk.xingyaplearning.R;
 
 public class LearningActivity extends AppCompatActivity {
@@ -19,10 +21,10 @@ public class LearningActivity extends AppCompatActivity {
     private ImageButton mImgBtnPlay;
     private TextView mEnglishText;
 
-    private String mFuncType;
     private boolean mLearningType = true;
 
-    private LearningResourceManager mLearningResourceManager;
+    private YaoWordCategory mYaoWordCategory;
+    private YaoWordSound mYaoWordSound;
     private int  mIndex;
 
 
@@ -37,8 +39,9 @@ public class LearningActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learning);
 
         Bundle bundle = getIntent().getExtras();
-        mFuncType = bundle.getString(MainActivity.ACTIVITY_FUNCTION);
+        mYaoWordCategory = (YaoWordCategory)bundle.getSerializable(MainActivity.ACTIVITY_FUNCTION);
         mLearningType = bundle.getBoolean(MainActivity.ACTIVITY_TYPE);
+
         int id = mLearningType ? R.string.title_learing : R.string.title_example;
         setTitle(id);
 
@@ -50,14 +53,14 @@ public class LearningActivity extends AppCompatActivity {
         mEnglishText = (TextView)findViewById(R.id.tv_english);
         mImgBtnPlay = (ImageButton)findViewById(R.id.btn_learning_play);
 
-        mLearningResourceManager = new LearningResourceManager(this, mFuncType, "resource");
-
         mImgBtnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLearningResourceManager.playSound(mIndex);
+                mYaoWordSound.playSound(mIndex);
             }
         });
+
+        mYaoWordSound = new YaoWordSound(this, mYaoWordCategory);
 
         mImgBtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +73,7 @@ public class LearningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mIndex += 1;
-                if (mIndex >= mLearningResourceManager.getSize()) {
+                if (mIndex >= mYaoWordCategory.getSize()) {
                     mIndex = 0;
                 }
 
@@ -83,7 +86,7 @@ public class LearningActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mIndex -= 1;
                 if (mIndex < 0) {
-                    mIndex = mLearningResourceManager.getSize() - 1;
+                    mIndex = mYaoWordCategory.getSize() - 1;
                 }
 
                 displayResource();
@@ -95,14 +98,16 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     private void displayResource() {
-        if (mIndex >= mLearningResourceManager.getSize() || mIndex < 0) {
+        if (mIndex >= mYaoWordCategory.getSize() || mIndex < 0) {
             return;
         }
 
-        mImageView.setImageBitmap(mLearningResourceManager.getImage(mIndex));
-        mEnglishText.setText(mLearningResourceManager.getResourceName(mIndex));
+        YaoWordVocabulary vocabulary = mYaoWordCategory.getVocabulary(mIndex);
+        Bitmap bmp = YaoWordImage.loadBitmapFromAsset(this, vocabulary.getImageFileName());
+        mImageView.setImageBitmap(bmp);
+        mEnglishText.setText(vocabulary.getName());
         if (mLearningType) {
-            mLearningResourceManager.playSound(mIndex);
+            mYaoWordSound.playSound(mIndex);
         }
     }
 }
